@@ -6,9 +6,15 @@ struct Loacation
 	int y;
 };
 
+struct Vector
+{
+	int movex;
+	int movey;
+};
+
 class SphereCollider
 {
-private:
+protected:
 	Loacation location;
 	int radius;
 public:

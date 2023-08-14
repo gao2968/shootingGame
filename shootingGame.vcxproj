@@ -151,16 +151,30 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="BulletsSpawner.cpp" />
+    <ClCompile Include="CharaBase.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Fps.cpp" />
     <ClCompile Include="GameMainScene.cpp" />
     <ClCompile Include="InputControl.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="NwaySpawner.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SphereCollider.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractScene.h" />
+    <ClInclude Include="Bullet.h" />
+    <ClInclude Include="BulletsSpawner.h" />
+    <ClInclude Include="CharaBase.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Fps.h" />
     <ClInclude Include="GameMainScene.h" />
     <ClInclude Include="InputControl.h" />
+    <ClInclude Include="NwaySpawner.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SphereCollider.h" />
   </ItemGroup>
