@@ -11,12 +11,15 @@ GameMainScene::~GameMainScene()
 
 void GameMainScene::Update()
 {
+	player.Update(this);
+
 }
 
 void GameMainScene::Draw() const
 {
 	DrawFormatString(0, 0, 0xffffff, "GameMain");
 	DrawCircle(1280, 720, 5, 0xffffff, 1);
+	player.Draw();
 }
 
 AbstractScene* GameMainScene::Change()
@@ -32,4 +35,5 @@ int GameMainScene::HitCheak()
 
 void GameMainScene::SpawnBullet()
 {
+	/*bullet[0] = player.*/
 }

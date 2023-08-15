@@ -10,7 +10,7 @@ public:
 	Enemy();
 	~Enemy();
 
-	void Update(GameMainScene* gamemain) override;
+	void Update(AbstractScene* s) override;
 	void Draw() const override;
 	int Hit(int damage) override;
 };

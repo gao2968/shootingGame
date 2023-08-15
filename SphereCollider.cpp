@@ -8,5 +8,11 @@ int SphereCollider::CheckCollision(SphereCollider sphereCollider)
     int a = location.x - sphereCollider.location.x;
     int b = location.y - sphereCollider.location.y;
     float c = sqrtf(a * a + b * b);
+
+    //‚»‚ê‚¼‚ê‚Ì”¼Œa‚Ì‡Œv‚Æ2“_ŠÔ‚Ì‹——£‚ğ”ä‚×‚é
+    if (c <= radius + sphereCollider.radius){
+        return 1;
+    }
     return 0;
 }
+

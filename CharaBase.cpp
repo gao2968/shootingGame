@@ -1,7 +1,6 @@
 #include "CharaBase.h"
-#include "DxLib.h"
 
-void CharaBase::Update(GameMainScene* gamemain)
+void CharaBase::Update(AbstractScene* s)
 {
 	//gamemain‚Ìhitchaek‚ğŒÄ‚Ño‚µtrue‚¾‚Á‚½‚çhit‚ğŒÄ‚Ño‚µˆ—‚ğ‹L“ü
 }

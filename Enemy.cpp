@@ -8,7 +8,7 @@ Enemy::~Enemy()
 {
 }
 
-void Enemy::Update(GameMainScene* gamemain)
+void Enemy::Update(AbstractScene* s)
 {
 }
 

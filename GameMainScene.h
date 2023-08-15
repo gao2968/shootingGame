@@ -1,12 +1,13 @@
 #pragma once
 #include "AbstractScene.h"
+
 #include "Player.h"
 #include "Enemy.h"
 #include "Bullet.h"
 
 class GameMainScene : public AbstractScene
 {
-private:
+public:
 	Player player;
 	int life;
 	Enemy* enemy;		//=new int[n]‚İ‚½‚¢‚ÈŠ´‚¶‚Å“®“I‚Éƒƒ‚ƒŠ‚ğŠm•Û‚·‚é
@@ -20,6 +21,6 @@ public:
 	AbstractScene* Change() override;	//‘JˆÚæ‚Ìw’è
 
 	int HitCheak();
-	void SpawnBullet();
+	static void SpawnBullet();
 };
 
