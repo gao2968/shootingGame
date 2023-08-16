@@ -9,4 +9,3 @@ private:
 public:
 	void Shoot(AbstractScene* s) override;
 };
-

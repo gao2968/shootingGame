@@ -11,7 +11,10 @@ public:
 	Player player;
 	int life;
 	Enemy* enemy;		//=new int[n]‚İ‚½‚¢‚ÈŠ´‚¶‚Å“®“I‚Éƒƒ‚ƒŠ‚ğŠm•Û‚·‚é
-	Bullet* bullet;		//bullet‚à“¯‚¶
+	
+	Bullet* bullet[100];		//bullet‚à“¯‚¶
+	int bNum = 0;  //‹…”ŠÇ—
+	int a;
 public:
 	GameMainScene();
 	~GameMainScene();
@@ -21,6 +24,6 @@ public:
 	AbstractScene* Change() override;	//‘JˆÚæ‚Ìw’è
 
 	int HitCheak();
-	static void SpawnBullet();
+	void SpawnBullet(BulletsSpawner* b);
 };
 

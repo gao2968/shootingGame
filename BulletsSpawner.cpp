@@ -3,10 +3,11 @@
 
 void BulletsSpawner::Shoot(AbstractScene* s)
 {
-	speed = 5;
-	angle = 1.0f;
-	acceleration = 2;
-	angulVelocity = 1.0f;
+	moveBulletSP.speed = 5;
+	moveBulletSP.angle = 1.0f;
+	moveBulletSP.acceleration = 2;
+	moveBulletSP.angleVelocity = 1.0f;
+
+
 	
-	GameMainScene::SpawnBullet();
 }

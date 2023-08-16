@@ -1,14 +1,13 @@
 #pragma once
 #include "AbstractScene.h"
-
+#include "MoveBullet.h"
 class BulletsSpawner
 {
 private:
-	int speed = 0;
-	float angle = 0;
-	int acceleration = 0;
-	float angulVelocity = 0;
+	MoveBullet moveBulletSP;
 public:
+	
 	virtual void Shoot(AbstractScene* s);
+	MoveBullet GetMove() { return moveBulletSP; }
 };
 

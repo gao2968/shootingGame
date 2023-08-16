@@ -173,6 +173,7 @@
     <ClInclude Include="Fps.h" />
     <ClInclude Include="GameMainScene.h" />
     <ClInclude Include="InputControl.h" />
+    <ClInclude Include="MoveBullet.h" />
     <ClInclude Include="NwaySpawner.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="SceneManager.h" />

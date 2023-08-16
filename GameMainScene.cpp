@@ -1,12 +1,15 @@
 #include "GameMainScene.h"
 #include "DxLib.h"
 
+
+
 GameMainScene::GameMainScene()
 {
 }
 
 GameMainScene::~GameMainScene()
 {
+	delete bullet;
 }
 
 void GameMainScene::Update()
@@ -29,11 +32,21 @@ AbstractScene* GameMainScene::Change()
 
 int GameMainScene::HitCheak()
 {
-	player.CheckCollision((SphereCollider)bullet[0]);	//キャストしてSphereColliderの型にする enemyも同じ感じ 弾の数だけループする
+	player.CheckCollision((SphereCollider)*bullet[0]);	//キャストしてSphereColliderの型にする enemyも同じ感じ 弾の数だけループする
+	
 	return 0;
 }
 
-void GameMainScene::SpawnBullet()
+void GameMainScene::SpawnBullet(BulletsSpawner* b)
 {
 	/*bullet[0] = player.*/
+	for (int i = 0; i < bNum; i++) {
+		//ここで使った弾とかを管理したい
+	}
+	if (b != nullptr) {
+		//bullet[bNum].SetMB(b->GetMove());
+	}
+	bullet[bNum++] = new Bullet(b);
+	player.getb()->Shoot();//いい感じに
+	
 }

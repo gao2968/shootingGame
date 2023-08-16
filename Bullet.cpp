@@ -5,6 +5,10 @@ Bullet::Bullet()
 {
 }
 
+Bullet::Bullet(BulletsSpawner* bs)
+{
+}
+
 Bullet::~Bullet()
 {
 }

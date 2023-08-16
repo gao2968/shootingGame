@@ -9,6 +9,7 @@ Player::Player()
 
 Player::~Player()
 {
+	delete bs;
 }
 
 void Player::Update(AbstractScene* s)
