@@ -24,7 +24,7 @@ GameMainScene::~GameMainScene()
 void GameMainScene::Update()
 {
 	player.Update(this);
-	SpawnBullet();
+	//SpawnBullet();
 	for (int i = 0; i < 100; i++) {
 		if (bullet[i] != nullptr) {
 			bullet[i]->Update();
@@ -62,7 +62,7 @@ int GameMainScene::HitCheak()
 	return 0;
 }
 
-void GameMainScene::SpawnBullet()
+void GameMainScene::SpawnBullet(BulletsSpawner* bs)
 {
 	/*bullet[0] = player.*/
 	//for (int i = 0; i < bNum; i++) {
@@ -73,12 +73,12 @@ void GameMainScene::SpawnBullet()
 	//}
 	//bullet[bNum++] = new Bullet(b);
 	
-	if (player.GetBulletSpawnFlg()) {
+	//if (player.GetBulletSpawnFlg()) {
 		for (int i = 0; i < 100; i++){
 			if (bullet[i] == nullptr) {
 
-				player.getb()->Shoot(this);//‚¢‚¢Š´‚¶‚É
-				bullet[i] = new Bullet(player.getb(), player.GetLocation());
+				//player.getb()->Shoot(this);//‚¢‚¢Š´‚¶‚É
+				bullet[i] = new Bullet(bs, player.GetLocation());
 				
 				/*player.getb()->GetMove();
 				bullet[i]->SetMB(player.getb()->GetMove());
@@ -86,5 +86,5 @@ void GameMainScene::SpawnBullet()
 				break;
 			}
 		}
-	}
+	//}
 }

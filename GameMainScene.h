@@ -23,6 +23,6 @@ public:
 	AbstractScene* Change() override;	//‘JˆÚæ‚Ìw’è
 
 	int HitCheak();
-	void SpawnBullet();
+	void SpawnBullet(BulletsSpawner* bs);
 };
 

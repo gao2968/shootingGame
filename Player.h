@@ -9,7 +9,6 @@ private:
 	//BulletsSpawner‚Ìƒ|ƒCƒ“ƒ^Œ^
 	BulletsSpawner* bs = new BulletsSpawner();
 	
-	bool bulletSpawnFlg;
 public:
 	Player();
 	~Player();
@@ -19,7 +18,6 @@ public:
 	int Hit(int damage) override;
 
 	BulletsSpawner* getb() { return bs; }
-	bool GetBulletSpawnFlg() { return bulletSpawnFlg; }
 	Location GetLocation() { return location; }
 };
 

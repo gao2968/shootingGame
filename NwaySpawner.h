@@ -7,5 +7,5 @@ private:
 	float baseAngle;
 	float angleDiff;
 public:
-	void Shoot(AbstractScene* s) override;
+	void Shoot(GameMainScene* s) override;
 };

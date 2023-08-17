@@ -1,6 +1,6 @@
 #include "NwaySpawner.h"
 
-void NwaySpawner::Shoot(AbstractScene* s)
+void NwaySpawner::Shoot(GameMainScene* s)
 {
 	BulletsSpawner::Shoot(s);
 }

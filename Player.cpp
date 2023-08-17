@@ -40,11 +40,9 @@ void Player::Update(GameMainScene* s)
 
 
 	if (InputControl::OnButton(XINPUT_BUTTON_B)) {
-		bulletSpawnFlg = true;
+		bs->Shoot(s);
 	}
-	else {
-		bulletSpawnFlg = false;
-	}
+	
 	
 }
 
