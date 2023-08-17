@@ -1,7 +1,7 @@
 #pragma once
 #include "DxLib.h"
 
-struct Loacation
+struct Location
 {
 	int x;
 	int y;
@@ -16,7 +16,7 @@ struct Vector
 class SphereCollider
 {
 protected:
-	Loacation location;
+	Location location;
 	int radius;
 public:
 	int CheckCollision(SphereCollider sphereCollider);

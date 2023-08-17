@@ -11,15 +11,24 @@ private:
 public:
 	Bullet();
 
-	Bullet(BulletsSpawner* bs);
+	Bullet(BulletsSpawner* bs , Location l);
 
 	~Bullet();
 
 	void Update();
 	void Draw() const;
+
+	void ChangeAngle();
+
 	int GetDamage() { return damage; }
+	int getmb() { return mb.speed; }
+	Location GetLocation() { return location; }
 	void SetMB(MoveBullet m)
 	{
 		mb = m;
+	}
+	void SetLocation(Location l)
+	{
+		location = l;
 	}
 };

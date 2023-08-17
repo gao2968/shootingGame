@@ -1,6 +1,7 @@
 #include "CharaBase.h"
+#include "GameMainScene.h"
 
-void CharaBase::Update(AbstractScene* s)
+void CharaBase::Update(GameMainScene* s)
 {
 	//gamemain‚Ìhitchaek‚ğŒÄ‚Ño‚µtrue‚¾‚Á‚½‚çhit‚ğŒÄ‚Ño‚µˆ—‚ğ‹L“ü
 }

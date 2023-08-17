@@ -1,4 +1,5 @@
 #include "Enemy.h"
+#include "GameMainScene.h"
 
 Enemy::Enemy()
 {
@@ -8,7 +9,7 @@ Enemy::~Enemy()
 {
 }
 
-void Enemy::Update(AbstractScene* s)
+void Enemy::Update(GameMainScene* s)
 {
 }
 

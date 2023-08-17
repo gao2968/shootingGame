@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "InputControl.h"
+#include "GameMainScene.h"
 
 Player::Player()
 {
@@ -12,7 +13,7 @@ Player::~Player()
 	delete bs;
 }
 
-void Player::Update(AbstractScene* s)
+void Player::Update(GameMainScene* s)
 {
 	if (InputControl::OnPressed(XINPUT_BUTTON_DPAD_UP)) {
 		vec.movey = -5;
@@ -39,7 +40,10 @@ void Player::Update(AbstractScene* s)
 
 
 	if (InputControl::OnButton(XINPUT_BUTTON_B)) {
-		bs->Shoot(s);
+		bulletSpawnFlg = true;
+	}
+	else {
+		bulletSpawnFlg = false;
 	}
 	
 }
