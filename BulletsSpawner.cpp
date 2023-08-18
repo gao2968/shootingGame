@@ -1,13 +1,29 @@
 #include "BulletsSpawner.h"
 #include "GameMainScene.h"
 
-void BulletsSpawner::Shoot(GameMainScene* s)
+BulletsSpawner::BulletsSpawner()
 {
-	moveBulletSP.speed = 6;
+	moveBulletSP.speed = 7;
 	moveBulletSP.angle = 1.0f;
 	moveBulletSP.acceleration = 2;
 	moveBulletSP.angleVelocity = 1.0f;
+}
 
-	s->SpawnBullet(this);
+BulletsSpawner::BulletsSpawner(int f)
+{
+	moveBulletSP.speed = 7;
+	moveBulletSP.angle = 1.0f;
+	moveBulletSP.acceleration = 2;
+	moveBulletSP.angleVelocity = 1.0f;
+}
+
+BulletsSpawner::~BulletsSpawner()
+{
+}
+
+void BulletsSpawner::Shoot(GameMainScene* s)
+{
+	
+	s->SpawnBullet();
 
 }

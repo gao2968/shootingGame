@@ -11,7 +11,7 @@ private:
 public:
 	Bullet();
 
-	Bullet(BulletsSpawner* bs , Location l);
+	Bullet(BulletsSpawner* bs , Location l , int flg);
 
 	~Bullet();
 

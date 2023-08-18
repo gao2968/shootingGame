@@ -6,6 +6,8 @@ Player::Player()
 {
 	location.x = 30;
 	location.y = 320;
+	radius = 5;
+	playerBulletFlg = false;
 }
 
 Player::~Player()
@@ -40,7 +42,12 @@ void Player::Update(GameMainScene* s)
 
 
 	if (InputControl::OnButton(XINPUT_BUTTON_B)) {
-		bs->Shoot(s);
+		playerBulletFlg = true;
+		//bs->Shoot(s);
+		nbs->Shoot(s);
+	}
+	else {
+		playerBulletFlg = false;
 	}
 	
 	

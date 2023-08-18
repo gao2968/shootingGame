@@ -4,10 +4,13 @@ class GameMainScene;
 #include "MoveBullet.h"
 class BulletsSpawner
 {
-private:
+protected:
 	MoveBullet moveBulletSP;
 
 public:
+	BulletsSpawner();
+	BulletsSpawner(int f);
+	~BulletsSpawner();
 	virtual void Shoot(GameMainScene* s);
 	MoveBullet GetMove() { return moveBulletSP; }
 

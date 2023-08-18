@@ -1,14 +1,15 @@
 #pragma once
 #include "CharaBase.h"
-#include "BulletsSpawner.h"
+#include "NwaySpawner.h"
 
 class Player : public CharaBase
 {
 private:
 	int score;
 	//BulletsSpawner‚Ìƒ|ƒCƒ“ƒ^Œ^
-	BulletsSpawner* bs = new BulletsSpawner();
-	
+	BulletsSpawner* bs = new BulletsSpawner(TRUE);
+	NwaySpawner* nbs = new NwaySpawner(3, 1.0f, 0.1f);
+	bool playerBulletFlg;
 public:
 	Player();
 	~Player();
@@ -17,7 +18,15 @@ public:
 	void Draw() const override;
 	int Hit(int damage) override;
 
-	BulletsSpawner* getb() { return bs; }
+	BulletsSpawner* GetBulletsSpawner() { return bs; }
+	NwaySpawner* GetNwaySpawner() { return nbs; }
 	Location GetLocation() { return location; }
+	bool GetPlayerBulletFlg() { return playerBulletFlg; }
+
+	void SetPlayerLocation(int x, int y)
+	{
+		location.x = x;
+		location.y = y;
+	}
 };
 

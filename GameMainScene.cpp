@@ -9,6 +9,14 @@ GameMainScene::GameMainScene()
 	{
 		bullet[i] = nullptr;
 	}
+
+	for (int i = 0; i < 10; i++)
+	{
+		enemy[i] = nullptr;
+	}
+
+	a = 0;
+	enemyBulletsFlg = false;
 }
 
 GameMainScene::~GameMainScene()
@@ -18,13 +26,34 @@ GameMainScene::~GameMainScene()
 			delete bullet;
 		}
 	}
+	for (int i = 0; i < 10; i++)
+	{
+		if (enemy[i] != nullptr) {
+			delete enemy;
+		}
+	}
 	
 }
 
 void GameMainScene::Update()
 {
 	player.Update(this);
-	//SpawnBullet();
+
+	if (a < 10) {
+		enemy[a] = new Enemy(a);
+		a++;
+	}
+
+	for (int i = 0; i < 10; i++)
+	{
+		if (enemy[i] != nullptr) {
+			enemy[i]->Update(this);
+		}
+	}
+
+	HitCheak();
+
+	//弾の削除
 	for (int i = 0; i < 100; i++) {
 		if (bullet[i] != nullptr) {
 			bullet[i]->Update();
@@ -42,6 +71,14 @@ void GameMainScene::Draw() const
 	DrawFormatString(0, 0, 0xffffff, "GameMain");
 	DrawCircle(1280, 720, 5, 0xffffff, 1);
 	player.Draw();
+
+	for (int i = 0; i < 10; i++)
+	{
+		if (enemy[i] != nullptr) {
+			enemy[i]->Draw();
+		}
+	}
+
 	for (int i = 0; i < 100; i++) {
 		if (bullet[i] != nullptr) {
 			bullet[i]->Draw();
@@ -59,10 +96,32 @@ int GameMainScene::HitCheak()
 {
 	//player.CheckCollision((SphereCollider)*bullet[0]);	//キャストしてSphereColliderの型にする enemyも同じ感じ 弾の数だけループする
 	
+	for (int i = 0; i < 100; i++) {
+		if (bullet[i] != nullptr) {
+			for (int j = 0; j < 10; j++){
+				if (enemy[j] != nullptr) {
+					if (bullet[i]->CheckCollision(static_cast<SphereCollider>(*enemy[j])) == TRUE)
+					{
+						enemy[j] = nullptr;
+					}
+				}
+			}
+		}
+	}
+
+	for (int i = 0; i < 100; i++) {
+		if (bullet[i] != nullptr) {
+			if (bullet[i]->CheckCollision(static_cast<SphereCollider>(player)) == TRUE) {
+				//プレイヤーが弾に当たった時の処理
+				player.SetPlayerLocation(30, 320);
+			}
+		}
+	}
+
 	return 0;
 }
 
-void GameMainScene::SpawnBullet(BulletsSpawner* bs)
+void GameMainScene::SpawnBullet()
 {
 	/*bullet[0] = player.*/
 	//for (int i = 0; i < bNum; i++) {
@@ -73,18 +132,31 @@ void GameMainScene::SpawnBullet(BulletsSpawner* bs)
 	//}
 	//bullet[bNum++] = new Bullet(b);
 	
-	//if (player.GetBulletSpawnFlg()) {
-		for (int i = 0; i < 100; i++){
-			if (bullet[i] == nullptr) {
-
-				//player.getb()->Shoot(this);//いい感じに
-				bullet[i] = new Bullet(bs, player.GetLocation());
-				
-				/*player.getb()->GetMove();
-				bullet[i]->SetMB(player.getb()->GetMove());
-				bullet[i]->SetLocation(player.GetLocation());*/
+	for (int i = 0; i < 100; i++){
+		if (bullet[i] == nullptr) {
+			if (player.GetPlayerBulletFlg()) {
+				bullet[i] = new Bullet(static_cast<BulletsSpawner*>(player.GetNwaySpawner()), player.GetLocation(), TRUE);
 				break;
 			}
 		}
-	//}
+	}
+
+	for (int i = 0; i < 100; i++){
+		if (bullet[i] == nullptr) {
+			for (int j = 0; j < 10; j++) {
+				if (enemy[j] != nullptr) {
+					if (enemy[j]->GetEnemyBulletFlg()) {
+						bullet[i] = new Bullet(static_cast<BulletsSpawner*>(enemy[j]->GetNwaySpawner()), enemy[j]->GetEnemyLoacation(), FALSE);
+						enemyBulletsFlg = true;
+						break;
+					}
+				}
+			}
+			if (enemyBulletsFlg) {
+				enemyBulletsFlg = false;
+				break;
+			}
+		}
+	}
+	
 }

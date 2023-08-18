@@ -7,10 +7,19 @@ Bullet::Bullet()
 {
 }
 
-Bullet::Bullet(BulletsSpawner* bs , Location l)
+Bullet::Bullet(BulletsSpawner* bs, Location l, int flg)
 {
 	location = l;
+	if (flg == TRUE)
+	{
+		location.x += 20;
+	}
+	else if (flg == FALSE)
+	{
+		location.x -= 20;
+	}
 	mb = bs->GetMove();
+	radius = 5;
 }
 
 Bullet::~Bullet()

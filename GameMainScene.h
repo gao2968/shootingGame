@@ -9,11 +9,12 @@ class GameMainScene : public AbstractScene
 public:
 	Player player;
 	int life;
-	//Enemy* enemy;		//=new int[n]みたいな感じで動的にメモリを確保する
+	Enemy* enemy[10];		//=new int[n]みたいな感じで動的にメモリを確保する
 	
 	Bullet* bullet[100]; /*= new Bullet()*/		//bulletも同じ
 	int bNum = 0;  //球数管理
 	int a;
+	bool enemyBulletsFlg;
 public:
 	GameMainScene();
 	~GameMainScene();
@@ -23,6 +24,7 @@ public:
 	AbstractScene* Change() override;	//遷移先の指定
 
 	int HitCheak();
-	void SpawnBullet(BulletsSpawner* bs);
+	void SpawnBullet();
+	Enemy* GetEnemy(int i) { return enemy[i]; }
 };
 

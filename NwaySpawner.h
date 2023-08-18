@@ -7,5 +7,6 @@ private:
 	float baseAngle;
 	float angleDiff;
 public:
+	NwaySpawner(int n, float base, float diff);
 	void Shoot(GameMainScene* s) override;
 };
