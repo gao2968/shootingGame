@@ -5,7 +5,7 @@
 
 GameMainScene::GameMainScene()
 {
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < BULLETS_MAX; i++)
 	{
 		bullet[i] = nullptr;
 	}
@@ -19,16 +19,18 @@ GameMainScene::GameMainScene()
 	enemyBulletsFlg = false;
 	img_Background = LoadGraph("images/background.jpg");
 	backgroundX, backgroundY = 0;
+
+	time = 0;
 }
 
 GameMainScene::~GameMainScene()
 {
-	for (int i = 0; i < 100; i++){
+	for (int i = 0; i < BULLETS_MAX; i++){
 		if (bullet[i] != nullptr){
 			delete bullet;
 		}
 	}
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < ENEMY_MAX; i++)
 	{
 		if (enemy[i] != nullptr) {
 			delete enemy;
@@ -41,22 +43,32 @@ void GameMainScene::Update()
 {
 	player.Update(this);
 
-	if (a < 10) {
-		enemy[a] = new Enemy(a);
-		a++;
+	if (++time == 300) {
+		for (int i = 0; i < ENEMY_MAX; i++) {
+			if (enemy[i] == nullptr) {
+				enemy[i] = new Enemy(0, boss);
+				bossNum = i;
+				break;
+			}
+		}
 	}
+	SpawnEnemy();
 
-	for (int i = 0; i < 10; i++)
-	{
+	for (int i = 0; i < ENEMY_MAX; i++){
 		if (enemy[i] != nullptr) {
 			enemy[i]->Update(this);
+			//敵の削除
+			if (enemy[i]->GetEnemyLoacation().x < -30) {
+				enemy[i] = nullptr;
+			}
 		}
 	}
 
 	HitCheak();
 
+
 	//弾の削除
-	for (int i = 0; i < 100; i++) {
+	for (int i = 0; i < BULLETS_MAX; i++) {
 		if (bullet[i] != nullptr) {
 			bullet[i]->Update();
 			if (bullet[i]->GetLocation().x > 1280 || bullet[i]->GetLocation().x < 0 ||
@@ -71,6 +83,7 @@ void GameMainScene::Update()
 	if (backgroundX <= -2048) {
 		backgroundX = 0;
 	}
+
 }
 
 void GameMainScene::Draw() const
@@ -81,14 +94,14 @@ void GameMainScene::Draw() const
 	DrawCircle(1280, 720, 5, 0xffffff, 1);
 	player.Draw();
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < ENEMY_MAX; i++)
 	{
 		if (enemy[i] != nullptr) {
 			enemy[i]->Draw();
 		}
 	}
 
-	for (int i = 0; i < 100; i++) {
+	for (int i = 0; i < BULLETS_MAX; i++) {
 		if (bullet[i] != nullptr) {
 			bullet[i]->Draw();
 		}
@@ -105,24 +118,30 @@ int GameMainScene::HitCheak()
 {
 	//player.CheckCollision((SphereCollider)*bullet[0]);	//キャストしてSphereColliderの型にする enemyも同じ感じ 弾の数だけループする
 	
-	for (int i = 0; i < 100; i++) {
-		if (bullet[i] != nullptr) {
-			for (int j = 0; j < 10; j++){
+	for (int i = 0; i < BULLETS_MAX; i++) {
+		if (bullet[i] != nullptr && bullet[i]->GetSpawnFlg() == TRUE) {
+			for (int j = 0; j < ENEMY_MAX; j++){
 				if (enemy[j] != nullptr) {
-					if (bullet[i]->CheckCollision(static_cast<SphereCollider>(*enemy[j])) == TRUE)
-					{
-						enemy[j] = nullptr;
+					if (bullet[i]->CheckCollision(static_cast<SphereCollider>(*enemy[j])) == TRUE){
+						//ここにenemy[j].Hitを入れる
+						if (enemy[j]->Hit(1) == TRUE) {
+							enemy[j] = nullptr;
+						}
+						bullet[i] = nullptr;
+						break;
 					}
 				}
 			}
 		}
 	}
 
-	for (int i = 0; i < 100; i++) {
+	for (int i = 0; i < BULLETS_MAX; i++) {
 		if (bullet[i] != nullptr) {
 			if (bullet[i]->CheckCollision(static_cast<SphereCollider>(player)) == TRUE) {
 				//プレイヤーが弾に当たった時の処理
 				player.SetPlayerLocation(30, 320);
+				bullet[i] = nullptr;
+				break;
 			}
 		}
 	}
@@ -141,7 +160,7 @@ void GameMainScene::SpawnBullet()
 	//}
 	//bullet[bNum++] = new Bullet(b);
 	
-	for (int i = 0; i < 100; i++){
+	for (int i = 0; i < BULLETS_MAX; i++){
 		if (bullet[i] == nullptr) {
 			if (player.GetPlayerBulletFlg()) {
 				bullet[i] = new Bullet(static_cast<BulletsSpawner*>(player.GetNwaySpawner()), player.GetLocation(), TRUE);
@@ -150,9 +169,9 @@ void GameMainScene::SpawnBullet()
 		}
 	}
 
-	for (int i = 0; i < 100; i++){
+	for (int i = 0; i < BULLETS_MAX; i++){
 		if (bullet[i] == nullptr) {
-			for (int j = 0; j < 10; j++) {
+			for (int j = 0; j < ENEMY_MAX; j++) {
 				if (enemy[j] != nullptr) {
 					if (enemy[j]->GetEnemyBulletFlg()) {
 						bullet[i] = new Bullet(static_cast<BulletsSpawner*>(enemy[j]->GetNwaySpawner()), enemy[j]->GetEnemyLoacation(), FALSE);
@@ -168,4 +187,18 @@ void GameMainScene::SpawnBullet()
 		}
 	}
 	
+}
+
+void GameMainScene::SpawnEnemy()
+{
+	randEnemy = GetRand(240);
+
+	if (randEnemy % 240 == 0) {
+		for (int i = 0; i < ENEMY_MAX; i++){
+			if (enemy[i] == nullptr) {
+				enemy[i] = new Enemy(GetRand(9), GetRand(1));
+				break;
+			}
+		}
+	}
 }

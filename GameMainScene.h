@@ -5,21 +5,31 @@
 #include "Bullet.h"
 
 #define SCROLL_SPEED 5
+#define ENEMY_MAX 100
+#define BULLETS_MAX 100
 
 class GameMainScene : public AbstractScene
 {
 public:
 	Player player;
 	int life;
-	Enemy* enemy[10];		//=new int[n]みたいな感じで動的にメモリを確保する
-	
-	Bullet* bullet[100]; /*= new Bullet()*/		//bulletも同じ
-	int bNum = 0;  //球数管理
+	//enemy関連
+	Enemy* enemy[ENEMY_MAX];		//=new int[n]みたいな感じで動的にメモリを確保する
 	int a;
 	bool enemyBulletsFlg;
+	int randEnemy;
+	int rowEnemy;
+	int bossNum;
+
+	//bullet関連
+	Bullet* bullet[BULLETS_MAX]; /*= new Bullet()*/		//bulletも同じ
+	int bNum = 0;  //球数管理
+
 
 	int img_Background;
 	int backgroundX, backgroundY;
+
+	int time;
 public:
 	GameMainScene();
 	~GameMainScene();
@@ -30,6 +40,8 @@ public:
 
 	int HitCheak();
 	void SpawnBullet();
+	void SpawnEnemy();
+
 	Enemy* GetEnemy(int i) { return enemy[i]; }
 };
 

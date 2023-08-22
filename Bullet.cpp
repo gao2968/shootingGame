@@ -20,6 +20,7 @@ Bullet::Bullet(BulletsSpawner* bs, Location l, int flg)
 	}
 	mb = bs->GetMove();
 	radius = 5;
+	spawnFlg = flg;
 }
 
 Bullet::~Bullet()
@@ -36,7 +37,12 @@ void Bullet::Update()
 
 void Bullet::Draw() const
 {
-	DrawCircle(location.x, location.y, 5, 0x00ff00, TRUE);
+	if (spawnFlg == TRUE) {
+		DrawCircle(location.x, location.y, 5, 0x00ff00, TRUE);
+	}
+	else {
+		DrawCircle(location.x, location.y, 5, 0xf0ff00, TRUE);
+	}
 }
 
 void Bullet::ChangeAngle()

@@ -9,8 +9,8 @@ struct Location
 
 struct Vector
 {
-	int movex;
-	int movey;
+	float movex;
+	float movey;
 };
 
 class SphereCollider

@@ -8,7 +8,7 @@ private:
 	int score;
 	//BulletsSpawner‚Ìƒ|ƒCƒ“ƒ^Œ^
 	BulletsSpawner* bs = new BulletsSpawner(TRUE);
-	NwaySpawner* nbs = new NwaySpawner(3, 1.0f, 0.1f);
+	NwaySpawner* nWeapon = new NwaySpawner(3, 1.0f, 0.1f);
 	bool playerBulletFlg;
 	int fps;
 public:
@@ -20,7 +20,7 @@ public:
 	int Hit(int damage) override;
 
 	BulletsSpawner* GetBulletsSpawner() { return bs; }
-	NwaySpawner* GetNwaySpawner() { return nbs; }
+	NwaySpawner* GetNwaySpawner() { return nWeapon; }
 	Location GetLocation() { return location; }
 	bool GetPlayerBulletFlg() { return playerBulletFlg; }
 

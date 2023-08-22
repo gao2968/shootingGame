@@ -44,7 +44,7 @@ void Player::Update(GameMainScene* s)
 
 	if (InputControl::OnButton(XINPUT_BUTTON_B) || (InputControl::OnPressed(XINPUT_BUTTON_B) && ++fps % 20 == 0)) {
 		playerBulletFlg = true;
-		nbs->Shoot(s);
+		nWeapon->Shoot(s);
 	}
 	else {
 		playerBulletFlg = false;
