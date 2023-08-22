@@ -4,6 +4,8 @@
 #include "Enemy.h"
 #include "Bullet.h"
 
+#define SCROLL_SPEED 5
+
 class GameMainScene : public AbstractScene
 {
 public:
@@ -15,6 +17,9 @@ public:
 	int bNum = 0;  //‹…”ŠÇ—
 	int a;
 	bool enemyBulletsFlg;
+
+	int img_Background;
+	int backgroundX, backgroundY;
 public:
 	GameMainScene();
 	~GameMainScene();

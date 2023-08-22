@@ -17,6 +17,8 @@ GameMainScene::GameMainScene()
 
 	a = 0;
 	enemyBulletsFlg = false;
+	img_Background = LoadGraph("images/background.jpg");
+	backgroundX, backgroundY = 0;
 }
 
 GameMainScene::~GameMainScene()
@@ -64,10 +66,17 @@ void GameMainScene::Update()
 			}
 		}
 	}
+
+	backgroundX -= SCROLL_SPEED;
+	if (backgroundX <= -2048) {
+		backgroundX = 0;
+	}
 }
 
 void GameMainScene::Draw() const
 {
+	DrawGraph(backgroundX, backgroundY, img_Background, FALSE);
+	DrawGraph(backgroundX + 2048, backgroundY, img_Background, FALSE);
 	DrawFormatString(0, 0, 0xffffff, "GameMain");
 	DrawCircle(1280, 720, 5, 0xffffff, 1);
 	player.Draw();

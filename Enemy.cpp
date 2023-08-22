@@ -32,6 +32,9 @@ void Enemy::Update(GameMainScene* s)
 	else {
 		enemyBulletFlg = false;
 	}
+
+
+
 }
 
 void Enemy::Draw() const

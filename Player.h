@@ -10,6 +10,7 @@ private:
 	BulletsSpawner* bs = new BulletsSpawner(TRUE);
 	NwaySpawner* nbs = new NwaySpawner(3, 1.0f, 0.1f);
 	bool playerBulletFlg;
+	int fps;
 public:
 	Player();
 	~Player();

@@ -8,6 +8,7 @@ Player::Player()
 	location.y = 320;
 	radius = 5;
 	playerBulletFlg = false;
+	fps = 0;
 }
 
 Player::~Player()
@@ -41,9 +42,8 @@ void Player::Update(GameMainScene* s)
 	location.x += vec.movex;
 
 
-	if (InputControl::OnButton(XINPUT_BUTTON_B)) {
+	if (InputControl::OnButton(XINPUT_BUTTON_B) || (InputControl::OnPressed(XINPUT_BUTTON_B) && ++fps % 20 == 0)) {
 		playerBulletFlg = true;
-		//bs->Shoot(s);
 		nbs->Shoot(s);
 	}
 	else {
