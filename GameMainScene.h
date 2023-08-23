@@ -30,6 +30,8 @@ public:
 	int backgroundX, backgroundY;
 
 	int time;
+
+	int f = 0;
 public:
 	GameMainScene();
 	~GameMainScene();
@@ -39,7 +41,7 @@ public:
 	AbstractScene* Change() override;	//‘JˆÚæ‚Ìw’è
 
 	int HitCheak();
-	void SpawnBullet();
+	void SpawnBullet(int type);
 	void SpawnEnemy();
 
 	Enemy* GetEnemy(int i) { return enemy[i]; }

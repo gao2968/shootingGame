@@ -11,7 +11,7 @@ public:
 	BulletsSpawner();
 	BulletsSpawner(int f);
 	~BulletsSpawner();
-	virtual void Shoot(GameMainScene* s);
+	virtual void Shoot(GameMainScene* s ,int type);
 	MoveBullet GetMove() { return moveBulletSP; }
 
 };

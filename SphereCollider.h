@@ -20,6 +20,7 @@ protected:
 	int radius;
 public:
 	int CheckCollision(SphereCollider sphereCollider);
+	int CheckCollisionBox(SphereCollider sphereCollider);
 
 };
 

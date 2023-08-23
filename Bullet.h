@@ -2,6 +2,13 @@
 #include "SphereCollider.h"
 #include "MoveBullet.h"
 #include "BulletsSpawner.h"
+
+enum BULLET_TYPE
+{
+	normalBullet = 0,
+	beamBullet
+};
+
 class Bullet : public SphereCollider
 {
 private:
@@ -9,10 +16,11 @@ private:
 	Vector vec;
 	MoveBullet mb;
 	int spawnFlg;	//ìGÇ™î≠éÀÇµÇΩíeÇ©ÉvÉåÉCÉÑÅ[Ç™î≠éÀÇµÇΩíeÇ©
+	int bulletType;
 public:
 	Bullet();
 
-	Bullet(BulletsSpawner* bs , Location l , int flg);
+	Bullet(BulletsSpawner* bs , Location l , int flg ,int type);
 
 	~Bullet();
 
@@ -25,6 +33,7 @@ public:
 	int getmb() { return mb.speed; }
 	Location GetLocation() { return location; }
 	int GetSpawnFlg() { return spawnFlg; }
+	int GetBulletType() { return bulletType; }
 	void SetMB(MoveBullet m)
 	{
 		mb = m;

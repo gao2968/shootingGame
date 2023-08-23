@@ -21,9 +21,9 @@ BulletsSpawner::~BulletsSpawner()
 {
 }
 
-void BulletsSpawner::Shoot(GameMainScene* s)
+void BulletsSpawner::Shoot(GameMainScene* s ,int type)
 {
 	
-	s->SpawnBullet();
+	s->SpawnBullet(type);
 
 }

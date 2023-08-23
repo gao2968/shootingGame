@@ -7,20 +7,40 @@ Bullet::Bullet()
 {
 }
 
-Bullet::Bullet(BulletsSpawner* bs, Location l, int flg)
+Bullet::Bullet(BulletsSpawner* bs, Location l, int flg, int type)
 {
-	location = l;
-	if (flg == TRUE)
-	{
-		location.x += 20;
+	if (type == normalBullet) {
+		location = l;
+		if (flg == TRUE)
+		{
+			location.x += 20;
+		}
+		else if (flg == FALSE)
+		{
+			location.x -= 20;
+		}
+		mb = bs->GetMove();
+		radius = 5;
+		spawnFlg = flg;
+		bulletType = type;
+		damage = 1;
 	}
-	else if (flg == FALSE)
-	{
-		location.x -= 20;
+	else if (type == beamBullet) {
+		location = l;
+		if (flg == TRUE)
+		{
+			location.x += 20;
+		}
+		else if (flg == FALSE)
+		{
+			location.x -= 20;
+		}
+		mb = bs->GetMove();
+		radius = 5;
+		spawnFlg = flg;
+		bulletType = type;
+		damage = 10;
 	}
-	mb = bs->GetMove();
-	radius = 5;
-	spawnFlg = flg;
 }
 
 Bullet::~Bullet()
@@ -29,19 +49,32 @@ Bullet::~Bullet()
 
 void Bullet::Update()
 {
-	//’e‚ÌˆÚ“®“™‚ð‹L“ü
-	ChangeAngle();
-	location.x += vec.movex;
-	location.y += vec.movey;
+	if (bulletType == normalBullet) {
+		//’e‚ÌˆÚ“®“™‚ð‹L“ü
+		ChangeAngle();
+		location.x += vec.movex;
+		location.y += vec.movey;
+	}
+	else if (bulletType == beamBullet) {
+		ChangeAngle();
+		mb.speed += 1;
+		location.x += vec.movex;
+		location.y += vec.movey;
+	}
 }
 
 void Bullet::Draw() const
 {
-	if (spawnFlg == TRUE) {
-		DrawCircle(location.x, location.y, 5, 0x00ff00, TRUE);
+	if (bulletType == normalBullet) {
+		if (spawnFlg == TRUE) {
+			DrawCircle(location.x, location.y, 5, 0x00ff00, TRUE);
+		}
+		else {
+			DrawCircle(location.x, location.y, 5, 0xf0ff00, TRUE);
+		}
 	}
-	else {
-		DrawCircle(location.x, location.y, 5, 0xf0ff00, TRUE);
+	else if (bulletType == beamBullet) {
+		DrawBox(location.x, location.y - 5, location.x + 100, location.y + 5, 0x00ff00, TRUE);
 	}
 }
 

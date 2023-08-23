@@ -16,3 +16,32 @@ int SphereCollider::CheckCollision(SphereCollider sphereCollider)
     return 0;
 }
 
+int SphereCollider::CheckCollisionBox(SphereCollider sphereCollider)
+{                                     //右上のｘ座標
+    //if (sphereCollider.location.x > location.x + 100 + sphereCollider.radius) {
+    //    //false
+    //}
+    //                                  //左上のｘ座標
+    //if (sphereCollider.location.x < location.x - sphereCollider.radius) {
+    //    //false
+    //}
+    //                                  //右上のｙ座標
+    //if (sphereCollider.location.y < location.y - 5 - sphereCollider.radius) {
+    //    //false
+    //}
+    //                                  //左上のｙ座標
+    //if (sphereCollider.location.y > location.y + 5 + sphereCollider.radius) {
+    //    //false
+    //}
+
+    if (sphereCollider.location.x <= location.x + 100 + sphereCollider.radius && sphereCollider.location.x >= location.x - sphereCollider.radius
+        && sphereCollider.location.y >= location.y - 5 - sphereCollider.radius && sphereCollider.location.y <= location.y + 5 + sphereCollider.radius) {
+
+        return TRUE;
+
+    }
+
+
+    return FALSE;;
+}
+

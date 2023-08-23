@@ -78,35 +78,37 @@ void Enemy::Update(GameMainScene* s)
 {
 	//’e‚Ì”­ŽË
 	rand = GetRand(180);
-	if (enemyType == normal) {
+	switch (enemyType)
+	{
+	case normal:
 		if (rand % 180 == 0) {
 			enemyBulletFlg = true;
-			nWeapon->Shoot(s);
+			nWeapon->Shoot(s,normalBullet);
 		}
 		else {
 			enemyBulletFlg = false;
 		}
-	}
-
-	if (enemyType == boss) {
-		if (rand % 60 == 0) {
-			enemyBulletFlg = true;
-			nWeapon->Shoot(s);
-		}
-		else {
-			enemyBulletFlg = false;
-		}
-	}
-
-	if (enemyType == mover) {
+		break;
+	case mover:
 		if (rand % 120 == 0) {
 			enemyBulletFlg = true;
-			nWeapon->Shoot(s);
+			nWeapon->Shoot(s,normalBullet);
 		}
 		else {
 			enemyBulletFlg = false;
 		}
+		break;
+	case boss:
+		if (rand % 60 == 0) {
+			enemyBulletFlg = true;
+			nWeapon->Shoot(s,normalBullet);
+		}
+		else {
+			enemyBulletFlg = false;
+		}
+		break;
 	}
+
 
 	//ˆÚ“®
 

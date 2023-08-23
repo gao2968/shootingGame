@@ -21,6 +21,8 @@ GameMainScene::GameMainScene()
 	backgroundX, backgroundY = 0;
 
 	time = 0;
+
+	
 }
 
 GameMainScene::~GameMainScene()
@@ -42,6 +44,11 @@ GameMainScene::~GameMainScene()
 void GameMainScene::Update()
 {
 	player.Update(this);
+
+	/*if (f == 0) {
+		bullet[99] = new Bullet(static_cast<BulletsSpawner*>(player.GetNwaySpawner()), player.GetLocation(), TRUE, beamBullet);
+		f = 1;
+	}*/
 
 	if (++time == 300) {
 		for (int i = 0; i < ENEMY_MAX; i++) {
@@ -119,24 +126,39 @@ int GameMainScene::HitCheak()
 	//player.CheckCollision((SphereCollider)*bullet[0]);	//ÉLÉÉÉXÉgÇµÇƒSphereColliderÇÃå^Ç…Ç∑ÇÈ enemyÇ‡ìØÇ∂ä¥Ç∂ íeÇÃêîÇæÇØÉãÅ[ÉvÇ∑ÇÈ
 	
 	for (int i = 0; i < BULLETS_MAX; i++) {
-		if (bullet[i] != nullptr && bullet[i]->GetSpawnFlg() == TRUE) {
+		if (bullet[i] != nullptr && bullet[i]->GetSpawnFlg() == TRUE) {//ìGÇÃíeÇ™ìGÇ…ìñÇΩÇÁÇ»Ç¢ÇÊÇ§Ç…Ç∑ÇÈ
 			for (int j = 0; j < ENEMY_MAX; j++){
 				if (enemy[j] != nullptr) {
-					if (bullet[i]->CheckCollision(static_cast<SphereCollider>(*enemy[j])) == TRUE){
-						//Ç±Ç±Ç…enemy[j].HitÇì¸ÇÍÇÈ
-						if (enemy[j]->Hit(1) == TRUE) {
-							enemy[j] = nullptr;
+
+					if (bullet[i]->GetBulletType() == normalBullet) {
+						if (bullet[i]->CheckCollision(static_cast<SphereCollider>(*enemy[j])) == TRUE) {
+							//Ç±Ç±Ç…enemy[j].HitÇì¸ÇÍÇÈ
+							if (enemy[j]->Hit(bullet[i]->GetDamage()) == TRUE) {
+								enemy[j] = nullptr;
+							}
+							bullet[i] = nullptr;
+							break;
 						}
-						bullet[i] = nullptr;
-						break;
 					}
+
+					if (bullet[i]->GetBulletType() == beamBullet) {
+						if (bullet[i]->CheckCollisionBox(static_cast<SphereCollider>(*enemy[j])) == TRUE) {
+							//Ç±Ç±Ç…enemy[j].HitÇì¸ÇÍÇÈ
+							if (enemy[j]->Hit(bullet[i]->GetDamage()) == TRUE) {
+								enemy[j] = nullptr;
+							}
+							bullet[i] = nullptr;
+							break;
+						}
+					}
+
 				}
 			}
 		}
 	}
 
 	for (int i = 0; i < BULLETS_MAX; i++) {
-		if (bullet[i] != nullptr) {
+		if (bullet[i] != nullptr && bullet[i]->GetSpawnFlg() == FALSE) {
 			if (bullet[i]->CheckCollision(static_cast<SphereCollider>(player)) == TRUE) {
 				//ÉvÉåÉCÉÑÅ[Ç™íeÇ…ìñÇΩÇ¡ÇΩéûÇÃèàóù
 				player.SetPlayerLocation(30, 320);
@@ -149,7 +171,7 @@ int GameMainScene::HitCheak()
 	return 0;
 }
 
-void GameMainScene::SpawnBullet()
+void GameMainScene::SpawnBullet(int type)
 {
 	/*bullet[0] = player.*/
 	//for (int i = 0; i < bNum; i++) {
@@ -163,7 +185,16 @@ void GameMainScene::SpawnBullet()
 	for (int i = 0; i < BULLETS_MAX; i++){
 		if (bullet[i] == nullptr) {
 			if (player.GetPlayerBulletFlg()) {
-				bullet[i] = new Bullet(static_cast<BulletsSpawner*>(player.GetNwaySpawner()), player.GetLocation(), TRUE);
+				switch (type)
+				{
+				case normalBullet:
+					bullet[i] = new Bullet(static_cast<BulletsSpawner*>(player.GetNwaySpawner()), player.GetLocation(), TRUE, normalBullet);
+					break;
+				case beamBullet:
+					bullet[i] = new Bullet(static_cast<BulletsSpawner*>(player.GetNwaySpawner()), player.GetLocation(), TRUE, beamBullet);
+					break;
+				}
+				
 				break;
 			}
 		}
@@ -174,7 +205,7 @@ void GameMainScene::SpawnBullet()
 			for (int j = 0; j < ENEMY_MAX; j++) {
 				if (enemy[j] != nullptr) {
 					if (enemy[j]->GetEnemyBulletFlg()) {
-						bullet[i] = new Bullet(static_cast<BulletsSpawner*>(enemy[j]->GetNwaySpawner()), enemy[j]->GetEnemyLoacation(), FALSE);
+						bullet[i] = new Bullet(static_cast<BulletsSpawner*>(enemy[j]->GetNwaySpawner()), enemy[j]->GetEnemyLoacation(), FALSE ,normalBullet);
 						enemyBulletsFlg = true;
 						break;
 					}

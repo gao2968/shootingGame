@@ -8,7 +8,7 @@ NwaySpawner::NwaySpawner(int n, float base, float diff)
 	angleDiff = diff;
 }
 
-void NwaySpawner::Shoot(GameMainScene* s)
+void NwaySpawner::Shoot(GameMainScene* s, int type)
 {
 	/*for (int i = 0; i < 10; i++)
 	{
@@ -32,7 +32,7 @@ void NwaySpawner::Shoot(GameMainScene* s)
 			break;
 		}
 
-		BulletsSpawner::Shoot(s);
+		BulletsSpawner::Shoot(s, type);
 	}
 	
 }
