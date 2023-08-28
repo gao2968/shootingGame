@@ -57,7 +57,7 @@ void Bullet::Update()
 	}
 	else if (bulletType == beamBullet) {
 		ChangeAngle();
-		mb.speed += 1;
+		mb.speed += mb.acceleration;
 		location.x += vec.movex;
 		location.y += vec.movey;
 	}

@@ -8,7 +8,7 @@ private:
 	int score;
 	//BulletsSpawner‚Ìƒ|ƒCƒ“ƒ^Œ^
 	BulletsSpawner* bs = new BulletsSpawner(TRUE);
-	NwaySpawner* nWeapon = new NwaySpawner(3, 1.0f, 0.1f);
+	NwaySpawner* nWeapon ;
 	bool playerBulletFlg;
 	int fps;
 public:

@@ -14,6 +14,7 @@ Player::Player()
 Player::~Player()
 {
 	delete bs;
+	delete nWeapon;
 }
 
 void Player::Update(GameMainScene* s)
@@ -44,6 +45,7 @@ void Player::Update(GameMainScene* s)
 
 	if (InputControl::OnButton(XINPUT_BUTTON_B) || (InputControl::OnPressed(XINPUT_BUTTON_B) && ++fps % 20 == 0)) {
 		playerBulletFlg = true;
+		nWeapon = new NwaySpawner(3, 1.0f, 0.1f);
 		nWeapon->Shoot(s,0);
 	}
 	else {
@@ -52,6 +54,7 @@ void Player::Update(GameMainScene* s)
 	
 	if (InputControl::OnButton(XINPUT_BUTTON_A) || (InputControl::OnPressed(XINPUT_BUTTON_A) && ++fps % 20 == 0)) {
 		playerBulletFlg = true;
+		nWeapon = new NwaySpawner(1, 1.0f, 0.1f);
 		nWeapon->Shoot(s,1);
 	}
 	else {

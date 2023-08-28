@@ -10,10 +10,6 @@ NwaySpawner::NwaySpawner(int n, float base, float diff)
 
 void NwaySpawner::Shoot(GameMainScene* s, int type)
 {
-	/*for (int i = 0; i < 10; i++)
-	{
-		s->GetEnemy(i);
-	}*/
 	
 	for (int i = 0; i < numBullets; i++)
 	{
